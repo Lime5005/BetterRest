@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var showingAlert = false
     
     var body: some View {
+        
         NavigationView {
             Form {
                 Section {
@@ -56,15 +57,19 @@ struct ContentView: View {
                         }
                     }
                 }
+                
+                Section {
+                    Text("\(alertTitle)")
+                    Text("\(alertMessage)")
+                        .foregroundColor(.blue)
+                        .font(.largeTitle)
+                }
+                Spacer()
+                
             }
             .navigationBarTitle("BetterRest")
-            .navigationBarItems(trailing:
-                                    Button(action: calculateBedTime, label: {
-                                        Text("Calculate")
-                                    })
-            )
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            .onAppear(){
+                self.calculateBedTime()
             }
         }
     }
