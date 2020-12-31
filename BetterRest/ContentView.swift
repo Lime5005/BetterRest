@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var wakeUp = defaultWakeTime
-    @State private var coffeeAmount = 1
+    @State private var coffeeAmount = 0
     @State private var sleepTime = 8.0
     
     @State private var alertTitle = ""
@@ -34,13 +34,25 @@ struct ContentView: View {
                     }
                 }
                 
-                Section {
-                    Text("Daily coffee intake:")
-                    Stepper(value: $coffeeAmount, in: 1...20) {
-                        if coffeeAmount == 1 {
-                            Text("1 cup")
-                        } else {
-                            Text("\(coffeeAmount) cups")
+//                Section {
+//                    Text("Daily coffee intake:")
+//                    Stepper(value: $coffeeAmount, in: 1...20) {
+//                        if coffeeAmount == 1 {
+//                            Text("1 cup")
+//                        } else {
+//                            Text("\(coffeeAmount) cups")
+//                        }
+//                    }
+//                }
+                
+                Section(header: Text("Daily coffee intake:")) {
+                    Picker("coffee", selection: $coffeeAmount) {
+                        ForEach(1 ..< 21) {
+                            if $0 == 1 {
+                                Text("\($0) cup")
+                            } else {
+                                Text("\($0) cups")
+                            }
                         }
                     }
                 }
